@@ -19,7 +19,7 @@ public class MainController {
             }
 
             List<String> argTypeList = JSON.parseArray(argTypes, String.class);
-            List<Class> argClassList = new ArrayList<>();
+            List<Class> argClassList = new ArrayList<Class>();
             for (String argType : argTypeList) {
                 argClassList.add(Class.forName(argType));
             }
@@ -27,7 +27,7 @@ public class MainController {
             argClassList.toArray(argClassArray);
 
             List<String> argValueStringList = JSON.parseArray(argValues, String.class);
-            List<Object> argValueList = new ArrayList<>();
+            List<Object> argValueList = new ArrayList<Object>();
             for (int i = 0; i < argTypeList.size(); i++) {
                 if (argClassList.get(i).equals(String.class)) {
                     argValueList.add(argValueStringList.get(i));

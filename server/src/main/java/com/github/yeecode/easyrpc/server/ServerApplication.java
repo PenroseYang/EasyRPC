@@ -6,6 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ServerApplication {
 
+    /**
+     * 运行之前，要把Project Structure里面的模块，语言等级，跳到java8以上
+     * @param args
+     */
     public static void main(String[] args) {
         SpringApplication.run(ServerApplication.class, args);
         System.out.println("*************************************************");

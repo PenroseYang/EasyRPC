@@ -16,7 +16,7 @@ public class UserService {
     public String getUserInfo(Integer id) {
         System.out.println("Method getUserInfo called:");
         System.out.println("Arg id=" + id);
-        Map<String, Object> userModel = new HashMap<>();
+        Map<String, Object> userModel = new HashMap<String, Object>();
         userModel.put("id", 1);
         userModel.put("name", "name");
         userModel.put("email", "name@sample.com");

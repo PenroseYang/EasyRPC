@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ServiceGetter {
-    private static Map<Class, Object> serviceMap = new HashMap<>();
+    private static Map<Class, Object> serviceMap = new HashMap<Class, Object>();
 
     public static <T> T getServiceByClazz(Class<T> clazz) {
         try {
