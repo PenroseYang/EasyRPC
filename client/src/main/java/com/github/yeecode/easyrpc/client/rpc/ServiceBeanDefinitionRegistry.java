@@ -25,6 +25,8 @@ import java.util.Set;
 
 /**
  * 为接口注入实现类
+ *
+ * (2) 这里核心流程
  */
 @Component
 public class ServiceBeanDefinitionRegistry implements BeanDefinitionRegistryPostProcessor, ResourceLoaderAware, ApplicationContextAware {
@@ -32,6 +34,7 @@ public class ServiceBeanDefinitionRegistry implements BeanDefinitionRegistryPost
     private static ApplicationContext applicationContext;
     private MetadataReaderFactory metadataReaderFactory;
     private ResourcePatternResolver resourcePatternResolver;
+
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
@@ -43,6 +46,13 @@ public class ServiceBeanDefinitionRegistry implements BeanDefinitionRegistryPost
         BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(clazz);
         GenericBeanDefinition definition = (GenericBeanDefinition) builder.getRawBeanDefinition();
         definition.getConstructorArgumentValues().addGenericArgumentValue(clazz);
+        /**
+         * 核心方法，把这个bean变成代理bean
+         *
+         * 最后核心就调用到这里去了
+         * com.github.yeecode.easyrpc.client.rpc.ServiceProxy#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
+         *
+         */
         definition.setBeanClass(ServiceFactory.class);
         definition.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
         registry.registerBeanDefinition(clazz.getSimpleName(), definition);
@@ -50,6 +60,8 @@ public class ServiceBeanDefinitionRegistry implements BeanDefinitionRegistryPost
 
     /**
      * 获取指定路径及子路径下的所有类
+     * scannerPackages 方法用于扫描指定包路径下的所有类，并返回一个包含所有类的集合。其中，
+     * ResourcePatternResolver 用于资源路径的解析，MetadataReaderFactory 用于读取类的元数据。
      */
     private Set<Class<?>> scannerPackages(String basePackage) {
         Set<Class<?>> set = new LinkedHashSet<>();

@@ -10,6 +10,16 @@ import java.util.List;
 
 @RestController
 public class MainController {
+
+    /**
+     * 这里服务端就一个方法，近似于一种转发器了
+     *
+     * @param identifier
+     * @param methodName
+     * @param argTypes
+     * @param argValues
+     * @return
+     */
     @RequestMapping("/")
     public Result rpcMain(String identifier, String methodName, String argTypes, String argValues) {
         try {

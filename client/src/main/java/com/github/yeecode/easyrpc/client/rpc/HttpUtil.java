@@ -23,6 +23,9 @@ public class HttpUtil {
             paramsList.add(new BasicNameValuePair("methodName", methodName));
             paramsList.add(new BasicNameValuePair("argTypes", argTypes));
             paramsList.add(new BasicNameValuePair("argValues", argValues));
+            /**
+             * 这里把找到服务端的ip和端口的逻辑都删掉了，直接就写死
+             */
             String result = sendPost("http://127.0.0.1:12311/", paramsList);
             return JSON.parseObject(result, Result.class);
         } catch (Exception ex) {
@@ -30,6 +33,14 @@ public class HttpUtil {
         }
     }
 
+    /**
+     * 编码直接就用的Http编码，啥也不干了快！
+     *
+     * @param url
+     * @param nameValuePairList
+     * @return
+     * @throws Exception
+     */
     private static synchronized String sendPost(String url, List<NameValuePair> nameValuePairList) throws Exception {
         CloseableHttpResponse response = null;
         try (CloseableHttpClient client = HttpClients.createDefault()) {

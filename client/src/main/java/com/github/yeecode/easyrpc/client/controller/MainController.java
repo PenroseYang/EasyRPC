@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MainController {
+
+    /**
+     * (1) yang笔记
+     * 先从client端开始看，比较简单
+     * 直接就注入Interface，去找那个beanRegister出来
+     */
     @Autowired
     private UserService userService;
     @Autowired
